@@ -1,3 +1,50 @@
+//Add
+
+package com.example.springboot;
+
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+//@RequestMapping(path="/calserv", consumes = MediaType.ALL_VALUE, produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+@RequestMapping(path="/calserv", produces="application/json")
+//@CrossOrigin(origins="*")
+public class Add {
+
+//    @GetMapping(value = "/add/{num1}/{num2}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/add/{num1}/{num2}")
+    public OperationInput add (@PathVariable int num1, @PathVariable int num2, @RequestBody OperationInput op) {
+    return op;
+//        return num1+num2;
+    }
+
+}
+
+//Operation
+
+package com.example.springboot;
+
+public interface Operation {
+
+}
+
+
+//OperationInput
+
+package com.example.springboot;
+
+import lombok.Data;
+
+@Data
+public class OperationInput {
+    String operation;
+    int num1;
+    int num2;
+}
+
+
+//pom.xml
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -53,6 +100,34 @@
 			<scope>test</scope>
 		</dependency>
 
+<!--		<dependency>-->
+<!--			<groupId>com.fasterxml.jackson.dataformat</groupId>-->
+<!--			<artifactId>jackson-dataformat-xml</artifactId>-->
+<!--			<version>2.12.3</version>-->
+<!--		</dependency>-->
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.projectlombok</groupId>-->
+<!--			<artifactId>lombok</artifactId>-->
+<!--		</dependency>-->
+
+		<!--		<dependency>-->
+<!--			<groupId>com.fasterxml.jackson.core</groupId>-->
+<!--			<artifactId>jackson-core</artifactId>-->
+<!--			<version>2.4.3</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.fasterxml.jackson.core</groupId>-->
+<!--			<artifactId>jackson-databind</artifactId>-->
+<!--			<version>2.4.3</version>-->
+<!--		</dependency>-->
+
 	</dependencies>
 
 	<build>
@@ -100,3 +175,6 @@
 	</build>
 
 </project>
+
+
+

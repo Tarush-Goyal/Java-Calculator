@@ -9,8 +9,7 @@ public class Multiply {
 
 
     @GetMapping("/calserv/multiply/{num1}/{num2}")
-    public long index(@PathVariable int num1, @PathVariable int num2 ) {
+    public long multiply (@PathVariable int num1, @PathVariable int num2 ) {
         return num1*num2;
     }
-
 }

@@ -9,7 +9,7 @@ public class Add {
 
 
     @GetMapping("/calserv/add/{num1}/{num2}")
-    public long index(@PathVariable int num1, @PathVariable int num2 ) {
+    public long add (@PathVariable int num1, @PathVariable int num2 ) {
         return num1+num2;
     }
 

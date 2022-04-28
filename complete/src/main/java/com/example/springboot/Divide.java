@@ -3,10 +3,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="/calserv", produces="application/json")
-public class Divide {
+public class Divide implements Operation{
 
 @GetMapping("/divide")
-    public OperationData divide (@RequestBody OperationData od) {
+    public OperationData operation (@RequestBody OperationData od) {
       od.result = od.num1/od.num2;
       return od;
     }

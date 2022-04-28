@@ -9,6 +9,6 @@ class AddTest {
         Add addTester = new Add();
         OperationData input = new OperationData("add",2,3, 0);
         OperationData output = new OperationData("add",2,3, 5);
-        assertEquals(output,addTester.add(input));
+        assertEquals(output,addTester.operation(input));
     }
 }

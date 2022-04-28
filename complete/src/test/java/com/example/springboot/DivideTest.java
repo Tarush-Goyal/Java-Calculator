@@ -9,6 +9,6 @@ class DivideTest {
         Divide divideTester = new Divide();
         OperationData input = new OperationData("divide",8,2, 0);
         OperationData output = new OperationData("divide",8,2, 4);
-        assertEquals(output,divideTester.divide(input));
+        assertEquals(output,divideTester.operation(input));
     }
 }

@@ -9,6 +9,6 @@ class SubtractTest {
         Subtract subtractTester = new Subtract();
         OperationData input = new OperationData("subtract",8,2, 0);
         OperationData output = new OperationData("subtract",8,2, 6);
-        assertEquals(output,subtractTester.subtract(input));
+        assertEquals(output,subtractTester.operation(input));
     }
 }

@@ -2,15 +2,20 @@ package com.example.springboot;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Divide {
 
 
-    @GetMapping("/calserv/divide/{num1}/{num2}")
-    public long divide (@PathVariable int num1, @PathVariable int num2 ) {
-        return num1/num2;
+//    @GetMapping("/calserv/divide/{num1}/{num2}")
+@GetMapping("/calserv/divide")
+//    public long divide (@PathVariable int num1, @PathVariable int num2 ) {
+    public OperationData divide (@RequestBody OperationData od) {
+//        return num1/num2;
+      od.result = od.num1/od.num2;
+      return od;
     }
 
     //add java docs

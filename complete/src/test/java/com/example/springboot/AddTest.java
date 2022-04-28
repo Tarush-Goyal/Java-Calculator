@@ -8,6 +8,8 @@ class AddTest {
     @Test
     public void testResult() {
         Add addTester = new Add();
-        assertEquals(4,addTester.add(1,3));
+        OperationData input = new OperationData("add",2,3, 0);
+        OperationData output = new OperationData("add",2,3, 5);
+        assertEquals(output,addTester.add(input));
     }
 }

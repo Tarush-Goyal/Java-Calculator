@@ -7,8 +7,8 @@ class DivideTest {
     @Test
     public void testResult() {
         Divide divideTester = new Divide();
-        OperationData input = new OperationData("divide",8,2, 0);
-        OperationData output = new OperationData("divide",8,2, 4);
+        OperationData input = new OperationData("division",8,2, 0);
+        OperationData output = new OperationData("division",8,2, 4);
         assertEquals(output,divideTester.operation(input));
     }
 }

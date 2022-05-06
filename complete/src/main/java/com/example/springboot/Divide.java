@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.*;
 public class Divide implements Operation{
 
 @GetMapping("/divide")
-    public OperationData operation (@RequestBody OperationData od) {
-      od.result = od.num1/od.num2;
-      return od;
+    public OperationData operation (@RequestBody OperationData operationData) {
+      operationData.operation = "division";
+      operationData.result = operationData.num1/operationData.num2;
+      return operationData;
     }
 }

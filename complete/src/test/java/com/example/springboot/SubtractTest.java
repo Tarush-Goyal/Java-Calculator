@@ -7,8 +7,8 @@ class SubtractTest {
     @Test
     public void testResult() {
         Subtract subtractTester = new Subtract();
-        OperationData input = new OperationData("subtract",8,2, 0);
-        OperationData output = new OperationData("subtract",8,2, 6);
+        OperationData input = new OperationData("subtraction",8,2, 0);
+        OperationData output = new OperationData("subtraction",8,2, 6);
         assertEquals(output,subtractTester.operation(input));
     }
 }

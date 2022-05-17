@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AddIT {
+public class EquationIT {
 
     @LocalServerPort
     private int serverPort;
@@ -19,23 +19,25 @@ public class AddIT {
     @Test
     public void APITest() throws JSONException {
 
-        JSONObject data = new JSONObject();
-        data.put("num1", "3");
-        data.put("num2", "4");
-
+        JSONObject input = new JSONObject();
+        input.put("equation", "a+b");
+        JSONObject variables = new JSONObject();
+        variables.put("a",1);
+        variables.put("b",2);
+        input.put("variables", variables);
 
         RestAssured.given()
                 .contentType(ContentType.JSON)
-                .body(data.toString())
+                .body(input.toString())
                 .log().all()
                 .when()
-                .get("http://localhost:"+serverPort+"/calserv/add")
+                .get("http://localhost:"+serverPort+"/calserv/equation")
                 .then()
                 .assertThat().statusCode(200)
-                .body("operation", equalTo("addition"))
-                .body("num1", equalTo(3f))
-                .body("num2", equalTo(4f))
-                .body("result", equalTo(7f))
+                .body("equation", equalTo("a+b"))
+                .body("variables.a",equalTo(1f))
+                .body("variables.b",equalTo(2f))
+                .body("result", equalTo(3f))
                 .log().all();
     }
 }

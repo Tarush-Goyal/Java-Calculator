@@ -8,9 +8,6 @@ import java.util.Stack;
 @RestController
 @RequestMapping(path="/calserv", produces="application/json")
 public class Equation{
-    Stack<Double>operands;
-    Stack<Character>operators;
-    OperationDataV2 operationDataV2;
 
     public double operation(double val1, double val2, char op){
         switch (op) {
@@ -42,7 +39,7 @@ public class Equation{
         }
     }
 
-    public String handleOperand(Character c,String number){
+    public String handleOperand(Character c,String number,OperationDataV2 operationDataV2){
         if (Character.isAlphabetic(c)) {
             if (operationDataV2.variables.containsKey(c+"")) {
                 number = operationDataV2.variables.get(c+"") + ""; //1
@@ -57,7 +54,7 @@ public class Equation{
         }
     }
 
-    public void handleOperator(Character c,String number){
+    public void handleOperator(Character c,String number, Stack<Character>operators, Stack<Double>operands){
         operands.push(Double.parseDouble(number));
         number="";
         while (operators.size() > 0 && precedence(c) <= precedence(operators.peek())) {
@@ -70,23 +67,23 @@ public class Equation{
         operators.push(c);
     }
 
-    public void iterateEquation(String equation){
+    public void iterateEquation(String equation, Stack<Character>operators, Stack<Double>operands, OperationDataV2 operationDataV2){
         String number="";
         for(int i=0;i<equation.length();i++){
             Character c=equation.charAt(i);
             if(c == '+' || c=='-' || c=='*' || c=='/'){
-                handleOperator(c,number);
+                handleOperator(c,number,operators,operands);
             }else{
-                number = handleOperand(c,number);
+                number = handleOperand(c,number, operationDataV2);
             }
         }
         operands.push(Double.parseDouble(number));
     }
 
-    public void findResult(String equation){
-        operands=new Stack<>();
-        operators=new Stack<>();
-        iterateEquation(equation);
+    public void findResult(String equation, OperationDataV2 operationDataV2){
+        Stack<Double>operands=new Stack<>();
+        Stack<Character>operators=new Stack<>();
+        iterateEquation(equation,operators,operands, operationDataV2);
         while (operators.size() > 0) {
             double val2 = operands.pop();
             double val1 = operands.pop();
@@ -103,9 +100,9 @@ public class Equation{
     public OperationDataV2 operation(@RequestBody String input){
         System.out.println(input);
         Gson gson = new Gson();
-        operationDataV2 = gson.fromJson(input,OperationDataV2.class);
+        OperationDataV2 operationDataV2 = gson.fromJson(input,OperationDataV2.class);
         String equation = operationDataV2.equation;
-        findResult(equation);
+        findResult(equation, operationDataV2);
         return operationDataV2;
     }
 }
